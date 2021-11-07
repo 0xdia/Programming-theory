@@ -2,8 +2,8 @@ class Knapsack:
     def __init__(self, W, N, Wi, Vi, solve=True):
         self.W = W
         self.N = N
-        self.Wi = Wi
-        self.Vi = Vi
+        self.Wi = [0]+Wi
+        self.Vi = [0]+Vi
         self.dp = []
         if solve:
             self.solve()
