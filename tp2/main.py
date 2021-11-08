@@ -6,7 +6,7 @@ Wi = list(map(int, input(f"Enter {N} comma separated values for items weights:\n
 Vi = list(map(int, input(f"Enter {N} comma separated values for items values:\n").split(',')))
 try:
     assert len(Wi)==N and len(Vi)==N
-    k = Knapsack(W, N, Wi, Vi)
+    k = Knapsack(W, N, Wi, Vi, all=True)
     print("The solution is ", k.get_solution())
 except:
     print("Wrong number of weights or values")
