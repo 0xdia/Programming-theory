@@ -4,9 +4,11 @@ from typing import cast
 class Node:
     __counter: int = 0
 
-    def __init__(self, val, neighbors: set['Node']) -> None:
+    def __init__(self, neighbors: set['Node'], val=0, id: str=None) -> None:
         Node.__counter += 1
-        self.__id = Node.__counter
+        self.__id = id
+        if not id:
+            self.__id = Node.__counter
         self.val = val
         self.neighbors = neighbors
 
@@ -35,7 +37,7 @@ class Graph:
         g = Graph(set())
         nodes = []
         for _ in range(size):
-            n = Node(random.random(), set())
+            n = Node(set(), random.random())
             nodes.append(n)
             g.nodes.add(n)
         for i in range(size):
@@ -49,7 +51,7 @@ class Graph:
     def generate_random(cls, size: int) -> 'Graph':
         g = Graph(set())
         for _ in range(size):
-            n = Node(random.random(), set())
+            n = Node(set(), random.random())
             g.nodes.add(n)
         for node_i in g.nodes:
             for node_j in g.nodes:
