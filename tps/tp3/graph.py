@@ -56,9 +56,6 @@ class Graph:
         for node_i in g.nodes:
             for node_j in g.nodes:
                 if node_i == node_j: continue
-                d = random.randint(-1, 1)
-                if d == 1:
+                if random.randint(0, 1):
                     node_i.neighbors.add(node_j)
-                elif d == -1:
-                    node_j.neighbors.add(node_i)
         return g
