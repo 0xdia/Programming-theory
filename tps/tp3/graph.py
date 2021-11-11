@@ -33,7 +33,7 @@ class Graph:
         return '\n'.join([node.__str__() for node in self.nodes])
 
     @classmethod
-    def generate_random_undericted(cls, size: int) -> 'Graph':
+    def generate_random_undericted(cls, size: int, factor: float=0.5) -> 'Graph':
         g = Graph(set())
         nodes = []
         for _ in range(size):
@@ -42,13 +42,13 @@ class Graph:
             g.nodes.add(n)
         for i in range(size):
             for j in range(i+1, size):
-                if random.randint(0, 1):
+                if random.random() < factor:
                     nodes[i].neighbors.add(nodes[j])
                     nodes[j].neighbors.add(nodes[i])
         return g
     
     @classmethod
-    def generate_random(cls, size: int) -> 'Graph':
+    def generate_random(cls, size: int, factor: float=0.5) -> 'Graph':
         g = Graph(set())
         for _ in range(size):
             n = Node(set(), random.random())
@@ -56,6 +56,6 @@ class Graph:
         for node_i in g.nodes:
             for node_j in g.nodes:
                 if node_i == node_j: continue
-                if random.randint(0, 1):
+                if random.random() < factor:
                     node_i.neighbors.add(node_j)
         return g
