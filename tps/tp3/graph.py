@@ -89,7 +89,7 @@ class Graph:
         return g
 
     @classmethod
-    def load(cls, file_path: str='./graph_serialized') -> 'Graph':
+    def load(cls, file_path: str='./graph_serialized.txt') -> 'Graph':
         with open(file_path, 'r', encoding="UTF-8") as f:
             g = Graph({})
             nodes = f.readline().split()
@@ -109,7 +109,7 @@ class Graph:
         return g
 
     @classmethod
-    def serialize(cls, graph: 'Graph', file_path: str='./graph_serialized') -> None:
+    def serialize(cls, graph: 'Graph', file_path: str='./graph_serialized.txt') -> None:
         with open(file_path, 'w', encoding="UTF-8") as f:
             nodes_line = ' '.join([f"{n.id}:{n.val}" for n in graph.nodes.values()])
             edges = []
