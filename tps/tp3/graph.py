@@ -1,4 +1,5 @@
 import random
+from pyvis.network import Network
 
 class Node:
     _counter: int = 0
@@ -116,3 +117,16 @@ class Graph:
                     edges.append(f"{n.id} {e.id}")
             nb_edges = len(edges)
             f.write('\n'.join([nodes_line, str(nb_edges), *edges]))
+
+    @classmethod
+    def vis(
+        cls, graph: 'Graph', file_path: str, height: str="700px", width: str="100%",
+        directed: bool=True, notebook: bool=False
+    ) -> None:
+        net = Network(height, width, directed, notebook)
+        for node_id in graph.nodes:
+            net.add_node(node_id)
+        for node1 in graph.nodes.values():
+            for node2 in node1.neighbors:
+                net.add_edge(node1.id, node2.id)
+        net.show(file_path)
