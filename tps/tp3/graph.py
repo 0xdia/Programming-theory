@@ -20,7 +20,8 @@ class Node:
     def __str__(self) -> str:
         return f"{self._id}: {self.val}, {{{', '.join([str(n._id) for n in self.neighbors])}}}"
     
-    def get_id(self) -> int:
+    @property
+    def id(self):
         return self._id
 
 
@@ -32,7 +33,7 @@ class Graph:
         return '\n'.join([node.__str__() for node in self.nodes.values()])
     
     def add_node(self, node: Node):
-        self.nodes[node.get_id()] = node
+        self.nodes[node.id] = node
 
     @classmethod
     def generate_random_undericted(cls, size: int, factor: float=0.5) -> 'Graph':
