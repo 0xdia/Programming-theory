@@ -1,27 +1,27 @@
 import random
 
 class Node:
-    __counter: int = 0
+    _counter: int = 0
 
     def __init__(self, neighbors: set['Node'], val=0, id: str=None) -> None:
-        self.__id = id
+        self._id = id
         if not id:
-            self.__id = Node.__counter
-        Node.__counter += 1
+            self._id = Node._counter
+        Node._counter += 1
         self.val = val
         self.neighbors = neighbors
 
     def __hash__(self) -> int:
-        return hash(self.__id)
+        return hash(self._id)
 
     def __eq__(self, o: 'Node') -> bool:
-        return self.__id == o.__id
+        return self._id == o._id
 
     def __str__(self) -> str:
-        return f"{self.__id}: {self.val}, {{{', '.join([str(n.__id) for n in self.neighbors])}}}"
+        return f"{self._id}: {self.val}, {{{', '.join([str(n._id) for n in self.neighbors])}}}"
     
     def get_id(self) -> int:
-        return self.__id
+        return self._id
 
 
 class Graph:
