@@ -18,27 +18,30 @@ class Node:
         return self.__id == o.__id
 
     def __str__(self) -> str:
-        return f"{self.val}, {{{', '.join([str(n.__id) for n in self.neighbors])}}}"
+        return f"{self.__id}: {self.val}, {{{', '.join([str(n.__id) for n in self.neighbors])}}}"
     
     def get_id(self) -> int:
         return self.__id
 
 
 class Graph:
-    def __init__(self, nodes: set[Node]) -> None:
+    def __init__(self, nodes: dict[str, Node]) -> None:
         self.nodes = nodes
     
     def __str__(self) -> str:
-        return '\n'.join([node.__str__() for node in self.nodes])
+        return '\n'.join([node.__str__() for node in self.nodes.values()])
+    
+    def add_node(self, node: Node):
+        self.nodes[node.get_id()] = node
 
     @classmethod
     def generate_random_undericted(cls, size: int, factor: float=0.5) -> 'Graph':
-        g = Graph(set())
-        nodes = []
+        g = Graph({})
+        nodes: list[Node] = []
         for _ in range(size):
             n = Node(set(), round(random.random(), 2))
             nodes.append(n)
-            g.nodes.add(n)
+            g.add_node(n)
         for i in range(size):
             for j in range(i+1, size):
                 if random.random() < factor:
@@ -48,12 +51,12 @@ class Graph:
     
     @classmethod
     def generate_random(cls, size: int, factor: float=0.5) -> 'Graph':
-        g = Graph(set())
+        g = Graph({})
         for _ in range(size):
             n = Node(set(), round(random.random(), 2))
-            g.nodes.add(n)
-        for node_i in g.nodes:
-            for node_j in g.nodes:
+            g.add_node(n)
+        for node_i in g.nodes.values():
+            for node_j in g.nodes.values():
                 if node_i == node_j: continue
                 if random.random() < factor:
                     node_i.neighbors.add(node_j)
