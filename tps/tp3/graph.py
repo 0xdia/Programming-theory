@@ -32,8 +32,32 @@ class Graph:
     def __str__(self) -> str:
         return '\n'.join([node.__str__() for node in self.nodes.values()])
     
-    def add_node(self, node: Node):
+    def get_node(self, id: str) -> Node:
+        return self.nodes.get(id)
+    
+    def is_there(self, id: str) -> bool:
+        return id in self.nodes
+
+    def add_node(self, node: Node) -> bool:
+        if node.id in self.nodes: return False
         self.nodes[node.id] = node
+        return True
+    
+    def remove_node(self, id: str) -> Node:
+        to_remove = self.nodes.pop(id)
+        if to_remove:
+            for node in self.nodes.values():
+                node.neighbors.discard(to_remove)
+        return to_remove
+    
+    def is_connected(self, node1: str, node2: str) -> bool:
+        return node2 in self.nodes[node1].neighbors
+    
+    def connect(self, node1: str, node2: str) -> bool:
+        old = self.is_connected(node1, node2)
+        if not old:
+            self.nodes[node1].neighbors.add(node2)
+        return old
 
     @classmethod
     def generate_random_undericted(cls, size: int, factor: float=0.5) -> 'Graph':
