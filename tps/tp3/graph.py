@@ -1,5 +1,4 @@
 import random
-from typing import cast
 
 class Node:
     __counter: int = 0
