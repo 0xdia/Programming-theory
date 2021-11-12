@@ -4,10 +4,10 @@ class Node:
     __counter: int = 0
 
     def __init__(self, neighbors: set['Node'], val=0, id: str=None) -> None:
-        Node.__counter += 1
         self.__id = id
         if not id:
             self.__id = Node.__counter
+        Node.__counter += 1
         self.val = val
         self.neighbors = neighbors
 
