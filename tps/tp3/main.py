@@ -1,11 +1,11 @@
 from graph import Node, Graph
 from pyvis.network import Network
 
-n = 20
+n = 8
 g = Graph.generate_random(n)
 print(g)
 print()
-g.serialize()
+Graph.serialize(g)
 print()
 print(Graph.load())
 

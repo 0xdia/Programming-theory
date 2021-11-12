@@ -108,11 +108,12 @@ class Graph:
                 g.connect(e[0], e[1])
         return g
 
-    def serialize(self, file_path: str='./graph_serialized') -> None:
+    @classmethod
+    def serialize(cls, graph: 'Graph', file_path: str='./graph_serialized') -> None:
         with open(file_path, 'w', encoding="UTF-8") as f:
-            nodes_line = ' '.join([f"{n.id}:{n.val}" for n in self.nodes.values()])
+            nodes_line = ' '.join([f"{n.id}:{n.val}" for n in graph.nodes.values()])
             edges = []
-            for n in self.nodes.values():
+            for n in graph.nodes.values():
                 for e in n.neighbors:
                     edges.append(f"{n.id} {e.id}")
             nb_edges = len(edges)
