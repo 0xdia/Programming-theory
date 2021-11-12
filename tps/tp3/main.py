@@ -2,4 +2,9 @@ from graph import Node, Graph
 
 n = 5
 
-print(Graph.generate_random_undericted(n))
+g = Graph.generate_random_undericted(n)
+print(g)
+print()
+g.serialize()
+print()
+print(Graph.load())

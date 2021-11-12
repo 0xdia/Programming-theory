@@ -73,7 +73,7 @@ class Graph:
                     nodes[i].neighbors.add(nodes[j])
                     nodes[j].neighbors.add(nodes[i])
         return g
-    
+
     @classmethod
     def generate_random(cls, size: int, factor: float=0.5) -> 'Graph':
         g = Graph({})
@@ -86,3 +86,33 @@ class Graph:
                 if random.random() < factor:
                     node_i.neighbors.add(node_j)
         return g
+
+    @classmethod
+    def load(cls, file_path: str='./graph_serialized') -> 'Graph':
+        with open(file_path, 'r', encoding="UTF-8") as f:
+            g = Graph({})
+            nodes = f.readline().split()
+            i = 0
+            for n in nodes:
+                n = n.split(':')
+                if len(n) == 2:
+                    id = n[0]
+                else:
+                    id = i
+                    i += 1
+                g.add_node(Node(set(), n[-1], id))
+            nb_edges = int(f.readline())
+            for _ in range(nb_edges):
+                e = f.readline().split()
+                g.connect(e[0], e[1])
+        return g
+
+    def serialize(self, file_path: str='./graph_serialized') -> None:
+        with open(file_path, 'w', encoding="UTF-8") as f:
+            nodes_line = ' '.join([f"{n.id}:{n.val}" for n in self.nodes.values()])
+            edges = []
+            for n in self.nodes.values():
+                for e in n.neighbors:
+                    edges.append(f"{n.id} {e.id}")
+            nb_edges = len(edges)
+            f.write('\n'.join([nodes_line, str(nb_edges), *edges]))
