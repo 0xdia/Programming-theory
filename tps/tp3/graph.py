@@ -126,8 +126,9 @@ class Graph:
     ) -> None:
         net = Network(height, width, directed, notebook)
         for node_id in graph.nodes:
-            net.add_node(node_id)
+            net.add_node(node_id, shape="circle")
         for node1 in graph.nodes.values():
             for node2 in node1.neighbors:
                 net.add_edge(node1.id, node2.id)
+        net.toggle_physics(False)
         net.show(file_path)
