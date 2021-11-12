@@ -36,7 +36,7 @@ class Graph:
         g = Graph(set())
         nodes = []
         for _ in range(size):
-            n = Node(set(), random.random())
+            n = Node(set(), round(random.random(), 2))
             nodes.append(n)
             g.nodes.add(n)
         for i in range(size):
@@ -50,7 +50,7 @@ class Graph:
     def generate_random(cls, size: int, factor: float=0.5) -> 'Graph':
         g = Graph(set())
         for _ in range(size):
-            n = Node(set(), random.random())
+            n = Node(set(), round(random.random(), 2))
             g.nodes.add(n)
         for node_i in g.nodes:
             for node_j in g.nodes:
