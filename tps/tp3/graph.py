@@ -56,7 +56,7 @@ class Graph:
     def connect(self, node1: str, node2: str) -> bool:
         old = self.is_connected(node1, node2)
         if not old:
-            self.nodes[node1].neighbors.add(node2)
+            self.nodes[node1].neighbors.add(self.nodes[node2])
         return old
 
     @classmethod
