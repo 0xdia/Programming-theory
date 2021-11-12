@@ -45,7 +45,7 @@ class ArticulationPointsFinder {
       for (auto& edge: _edges) {
         bool cutting = true;
         for (auto& set: _sets) {
-          if (set.find(edge.first)!=set.end() && set.find(edge.second)!=set.end()) {
+          if (belongs(set, edge.first) && belongs(set, edge.second)) {
             cutting = false;
             break;
           }
