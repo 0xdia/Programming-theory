@@ -1,0 +1,139 @@
+digraph "graph0"
+{
+
+bgcolor = "#ffffff"
+
+node [
+class = "node"
+,fillcolor = "#ff00ff",style = "filled"
+,width = "0.152778",height = "0.152778"
+,shape = "ellipse"
+,color = "#000000"
+,penwidth = "1"
+,"_vis_" = "label"
+];
+
+
+"N5" [
+pos = "1.8194,-2.7361!"
+,fillcolor = "#2ec27e",style = "filled"
+,width = "0.69444",height = "0.69444"
+,shape = "ellipse"
+,color = "#000000"
+,xlabel = "N5"
+]
+
+"N6" [
+pos = "1.4444,-1.5417!"
+,fillcolor = "#2ec27e",style = "filled"
+,width = "0.69444",height = "0.69444"
+,shape = "ellipse"
+,color = "#000000"
+,xlabel = "N6"
+]
+
+"N1" [
+pos = "1.0833,-6.3194!"
+,fillcolor = "#2ec27e",style = "filled"
+,width = "0.69444",height = "0.69444"
+,shape = "ellipse"
+,color = "#000000"
+,xlabel = "N1"
+]
+
+"N7" [
+pos = "1.4444,-0.34722!"
+,fillcolor = "#2ec27e",style = "filled"
+,width = "0.69444",height = "0.69444"
+,shape = "ellipse"
+,color = "#000000"
+,xlabel = "N7"
+]
+
+"N2" [
+pos = "1.0833,-5.125!"
+,fillcolor = "#2ec27e",style = "filled"
+,width = "0.69444",height = "0.69444"
+,shape = "ellipse"
+,color = "#000000"
+,xlabel = "N2"
+]
+
+"N3" [
+pos = "0.34722,-2.7361!"
+,fillcolor = "#2ec27e",style = "filled"
+,width = "0.69444",height = "0.69444"
+,shape = "ellipse"
+,color = "#000000"
+,xlabel = "N3"
+]
+
+"N4" [
+pos = "1.0833,-3.9306!"
+,fillcolor = "#2ec27e",style = "filled"
+,width = "0.69444",height = "0.69444"
+,shape = "ellipse"
+,color = "#000000"
+,xlabel = "N4"
+]
+
+
+
+edge [
+class = "edge"
+,dir=none
+,weight = "1"
+,penwidth = "1"
+,"_vis_" = "label"
+,"color" = "#a0a0a4"
+,"style" = "solid"
+];
+
+
+"N6" -> "N7" [id = "N6-N7"
+,"color" = "#a0a0a4"
+,"style" = "solid"
+];
+
+"N2" -> "N4" [id = "N2-N4"
+,"color" = "#a0a0a4"
+,"style" = "solid"
+];
+
+"N4" -> "N3" [id = "N4-N3"
+,"color" = "#a0a0a4"
+,"style" = "solid"
+];
+
+"N6" -> "N4" [id = "N6-N4"
+,"color" = "#a0a0a4"
+,"style" = "solid"
+];
+
+"N1" -> "N2" [id = "N1-N2"
+,"color" = "#a0a0a4"
+,"style" = "solid"
+];
+
+"N4" -> "N5" [id = "N4-N5"
+,"color" = "#a0a0a4"
+,"style" = "solid"
+];
+
+"N1" -> "N3" [id = "N1-N3"
+,"color" = "#a0a0a4"
+,"style" = "solid"
+];
+
+"N1" -> "N4" [id = "N1-N4"
+,"color" = "#a0a0a4"
+,"style" = "solid"
+];
+
+"N5" -> "N6" [id = "N5-N6"
+,"color" = "#a0a0a4"
+,"style" = "solid"
+];
+
+
+}
