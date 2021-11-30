@@ -1,3 +1,4 @@
 __pycache__/
-*.txt
-*.html
+.ipynb_checkpoints/
+*bak*
+*.svg
