@@ -5,76 +5,49 @@ bgcolor = "#ffffff"
 
 node [
 class = "node"
-,fillcolor = "#ff00ff",style = "filled"
-,width = "0.152778",height = "0.152778"
+,fillcolor = "#2ec27e",style = "filled"
+,width = "0.694444",height = "0.694444"
 ,shape = "ellipse"
 ,color = "#000000"
 ,penwidth = "1"
-,"_vis_" = "label"
+,"_vis_" = "label|id"
 ];
 
 
-"N5" [
-pos = "1.8194,-2.7361!"
-,fillcolor = "#2ec27e",style = "filled"
-,width = "0.69444",height = "0.69444"
-,shape = "ellipse"
-,color = "#000000"
-,xlabel = "N5"
+"N1" [
+pos = "-2.43056,1.04167!"
 ]
 
 "N6" [
-pos = "1.4444,-1.5417!"
-,fillcolor = "#2ec27e",style = "filled"
-,width = "0.69444",height = "0.69444"
-,shape = "ellipse"
-,color = "#000000"
-,xlabel = "N6"
+pos = "2.43056,-0.347222!"
 ]
 
-"N1" [
-pos = "1.0833,-6.3194!"
-,fillcolor = "#2ec27e",style = "filled"
-,width = "0.69444",height = "0.69444"
-,shape = "ellipse"
-,color = "#000000"
-,xlabel = "N1"
+"N5" [
+pos = "1.38889,0.694444!"
 ]
 
 "N7" [
-pos = "1.4444,-0.34722!"
-,fillcolor = "#2ec27e",style = "filled"
-,width = "0.69444",height = "0.69444"
-,shape = "ellipse"
-,color = "#000000"
-,xlabel = "N7"
+pos = "-2.77778,-3.125!"
 ]
 
 "N2" [
-pos = "1.0833,-5.125!"
-,fillcolor = "#2ec27e",style = "filled"
-,width = "0.69444",height = "0.69444"
-,shape = "ellipse"
-,color = "#000000"
-,xlabel = "N2"
+pos = "-3.81944,-0.347222!"
 ]
 
 "N3" [
-pos = "0.34722,-2.7361!"
-,fillcolor = "#2ec27e",style = "filled"
-,width = "0.69444",height = "0.69444"
-,shape = "ellipse"
-,color = "#000000"
-,xlabel = "N3"
+pos = "-1.73611,0!"
 ]
 
 "N4" [
-pos = "1.0833,-3.9306!"
-,fillcolor = "#2ec27e",style = "filled"
-,width = "0.69444",height = "0.69444"
-,shape = "ellipse"
-,color = "#000000"
-,xlabel = "N4"
+pos = "2.77778,1.04167!"
+]
+
+"N8" [
+pos = "-1.38889,-4.51389!"
+]
+
+"N9" [
+pos = "-0.694444,-3.125!"
 ]
 
 
@@ -86,53 +59,42 @@ class = "edge"
 ,penwidth = "1"
 ,"_vis_" = "label"
 ,"color" = "#a0a0a4"
+,"size" = ""
 ,"style" = "solid"
 ];
 
 
-"N6" -> "N7" [id = "N6-N7"
-,"color" = "#a0a0a4"
-,"style" = "solid"
+"N2" -> "N3" [id = "E2"
 ];
 
-"N2" -> "N4" [id = "N2-N4"
-,"color" = "#a0a0a4"
-,"style" = "solid"
+"N1" -> "N2" [id = "E1"
 ];
 
-"N4" -> "N3" [id = "N4-N3"
-,"color" = "#a0a0a4"
-,"style" = "solid"
+"N3" -> "N1" [id = "E3"
 ];
 
-"N6" -> "N4" [id = "N6-N4"
-,"color" = "#a0a0a4"
-,"style" = "solid"
+"N8" -> "N9" [id = "E9"
 ];
 
-"N1" -> "N2" [id = "N1-N2"
-,"color" = "#a0a0a4"
-,"style" = "solid"
+"N7" -> "N8" [id = "E8"
 ];
 
-"N4" -> "N5" [id = "N4-N5"
-,"color" = "#a0a0a4"
-,"style" = "solid"
+"N5" -> "N4" [id = "E4"
 ];
 
-"N1" -> "N3" [id = "N1-N3"
-,"color" = "#a0a0a4"
-,"style" = "solid"
+"N6" -> "N9" [id = "E12"
 ];
 
-"N1" -> "N4" [id = "N1-N4"
-,"color" = "#a0a0a4"
-,"style" = "solid"
+"N4" -> "N6" [id = "E5"
 ];
 
-"N5" -> "N6" [id = "N5-N6"
-,"color" = "#a0a0a4"
-,"style" = "solid"
+"N9" -> "N7" [id = "E7"
+];
+
+"N6" -> "N5" [id = "E6"
+];
+
+"N2" -> "N7" [id = "E10"
 ];
 
 
