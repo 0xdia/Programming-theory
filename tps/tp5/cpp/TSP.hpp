@@ -23,5 +23,24 @@ namespace tsp {
 
     private:
       int _city1, int _city2, int _distance;
-  }
+  };
+
+  class network {
+    public:
+      network() {}
+      network(vector<city>& cities, vector<road>& roads)
+        : _cities(cities), _roads(road)
+        {
+          _network(cities.size(), vector<city>(0));
+          for (road r in roads) {
+            _network[road.city1].push_back(r);
+            _network[road.city2].push_back(r);
+          }
+        }
+
+    private:
+      vector<vector<cities>> _network;
+      vector<city> _cities;
+      vector<road> _roads;
+  };
 };
