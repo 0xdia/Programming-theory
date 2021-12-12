@@ -38,6 +38,8 @@ def articulation_points(g: pgv.AGraph) -> list[Node]:
 
 if __name__ == "__main__":
     g = pgv.AGraph("./graph0.gv").to_undirected()
+    g.node_attr["color"] = "green"
+    g.node_attr["label"] = " "
     aps = articulation_points(g)
     print(aps)
     for ap in aps:
