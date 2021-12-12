@@ -16,12 +16,12 @@ def articulation_points(g: pgv.AGraph) -> list[Node]:
             if p and adj.get_name() == p.get_name():
                 continue
             if adj.attr.get('visited', False):
-                n.attr['low'] = min(n.attr['low'], adj.attr['tin'])
+                n.attr['low'] = min(int(n.attr['low']), int(adj.attr['tin']))
             else:
                 children += 1
                 custom_dfs(adj, n)
-                n.attr['low'] = min(n.attr['low'], adj.attr['low'])
-                if adj.attr['low'] >= n.attr['tin'] and p:
+                n.attr['low'] = min(int(n.attr['low']), int(adj.attr['low']))
+                if int(adj.attr['low']) >= int(n.attr['tin']) and p:
                     sol.append(n)
         if p is None and children > 1:
             sol.append(n)

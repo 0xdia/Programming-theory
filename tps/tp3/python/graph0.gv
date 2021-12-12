@@ -10,7 +10,7 @@ class = "node"
 ,shape = "ellipse"
 ,color = "#000000"
 ,penwidth = "1"
-,"_vis_" = "label|id"
+,"_vis_" = "label"
 ];
 
 
