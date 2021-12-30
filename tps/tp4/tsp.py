@@ -18,16 +18,13 @@ class TSP:
         self.graph.edge_attr['color'] = '#a0a0a4'
         self.graph.edge_attr['penwidth'] = 1
 
-    def draw(self):
+    def highlight_path(self, path):
         """Draw the path to be followed by the salesman"""
         self.pre_drawing()
-        """ for edge in path:
-            self.graph.get_edges(edge[0], edge[1]).attr['color'] = 'red'
-            self.graph.get_edges(edge[0], edge[1]).attr['penwidth'] = 5 """
+        for edge in path:
+            self.graph.get_edge(edge[0], edge[1]).attr['color'] = 'red'
+            self.graph.get_edge(edge[0], edge[1]).attr['penwidth'] = 5
 
-        self.graph.layout()
-        self.graph.draw("result.svg")
-        SVG("./result.svg")
 
     def algorithm(self, start):
         """Brute force algorithm that gives the exact solution for a TSP"""
