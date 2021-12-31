@@ -1,4 +1,6 @@
-from IPython.display import SVG
+#!/usr/bin/env python3
+
+import pygraphviz as pgv
 
 class TSP:
     def __init__(self, g):
@@ -6,7 +8,7 @@ class TSP:
         self.nodes = g.nodes()
         self.edges = g.edges()
         self.best_path = None
-        self.best_distance = 1000000
+        self.best_distance = None
 
 
     def get_distance(self, node_1, node_2):
@@ -35,13 +37,16 @@ class TSP:
     def highlight_path(self):
         """Draw the path to be followed by the salesman"""
         self.pre_drawing()
-        for e in range(1, len(self.best_path)):
-            self.graph.get_edge(self.best_path[e], self.best_path[e-1]).attr['color'] = 'red'
-            self.graph.get_edge(self.best_path[e], self.best_path[e-1]).attr['penwidth'] = 5
+        for edge in self.best_path:
+            self.graph.get_edge(edge[0], edge[1]).attr['color'] = 'red'
+            self.graph.get_edge(edge[0], edge[1]).attr['penwidth'] = 5
 
 
     def algorithm(self, start):
         """Brute force algorithm that gives the exact solution for a TSP"""
+        self.best_path = None
+        self.best_distance = 1000000000000
+
         N = len(self.nodes)
 
         def algorithm_continue(visited_nodes, current_traveled_distance):
@@ -72,4 +77,17 @@ class TSP:
 
             
         self.best_path, self.best_distance = algorithm_continue([start], 0)
+        
+        path_as_sequence_of_edges = []
+        for i in range(1, len(self.best_path)):
+            path_as_sequence_of_edges.append((self.best_path[i-1], self.best_path[i]))
+
+        self.best_path = path_as_sequence_of_edges
         self.highlight_path()
+
+
+
+
+if __name__ == '__main__':
+    g = pgv.AGraph("./graph.dot").to_undirected()
+    instance = TSP(g)
