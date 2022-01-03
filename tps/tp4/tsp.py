@@ -85,7 +85,38 @@ class TSP:
         self.best_path = path_as_sequence_of_edges
         self.highlight_path()
 
+    def hill_climbing(self, start):
+        """Hill climbing heuristic"""
+        self.best_path = [start]
+        self.best_distance = 0
+        N = len(self.nodes)
 
+        while len(self.best_path) < N:
+            we = []
+            for edge in self.edges:
+                nei = self.get_neighbors(self.best_path[-1])
+                for n in nei:
+                    we.append((self.get_distance(self.best_path[-1], n), self.best_path[-1], n))
+
+            we.sort()
+            for w in we:
+                """ if not w[1] in self.best_path:
+                    self.best_distance += w[0]
+                    self.best_path.append(w[1])
+                    break """
+                if not w[2] in self.best_path:
+                    self.best_distance += w[0]
+                    self.best_path.append(w[2])
+                    break
+
+        self.best_distance += self.get_distance(start, self.best_path[-1])
+        self.best_path.append(start)
+        path_as_sequence_of_edges = []
+        for i in range(1, len(self.best_path)):
+            path_as_sequence_of_edges.append((self.best_path[i-1], self.best_path[i]))
+
+        self.best_path = path_as_sequence_of_edges
+        self.highlight_path()
 
 
 if __name__ == '__main__':
