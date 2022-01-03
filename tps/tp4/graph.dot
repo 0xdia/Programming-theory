@@ -1,0 +1,204 @@
+digraph "graph"
+{
+
+bgcolor = "#ffffff"
+
+node [
+class = "node"
+,fillcolor = "#ff00ff",style = "filled"
+,width = "0.152778",height = "0.152778"
+,shape = "ellipse"
+,color = "#000000"
+,penwidth = "1"
+,"_vis_" = "id|label"
+];
+
+
+"N3" [
+pos = "-3.93376,-2.31731!"
+,fillcolor = "#4e9a06",style = "filled"
+,width = "0.694444",height = "0.694444"
+,shape = "ellipse"
+,color = "#000000"
+,penwidth = "1"
+]
+
+"N6" [
+pos = "3.34081,1.07051!"
+,fillcolor = "#4e9a06",style = "filled"
+,width = "0.694444",height = "0.694444"
+,shape = "ellipse"
+,color = "#000000"
+,penwidth = "1"
+]
+
+"N2" [
+pos = "-3.95513,1.28098!"
+,fillcolor = "#4e9a06",style = "filled"
+,width = "0.694444",height = "0.694444"
+,shape = "ellipse"
+,color = "#000000"
+,penwidth = "1"
+]
+
+"N5" [
+pos = "3.34402,-2.34081!"
+,fillcolor = "#4e9a06",style = "filled"
+,width = "0.694444",height = "0.694444"
+,shape = "ellipse"
+,color = "#000000"
+,penwidth = "1"
+]
+
+"N1" [
+pos = "-0.585466,2.87606!"
+,fillcolor = "#4e9a06",style = "filled"
+,width = "0.694444",height = "0.694444"
+,shape = "ellipse"
+,color = "#000000"
+,penwidth = "1"
+]
+
+"N4" [
+pos = "-0.349359,-4.36325!"
+,fillcolor = "#4e9a06",style = "filled"
+,width = "0.694444",height = "0.694444"
+,shape = "ellipse"
+,color = "#000000"
+,penwidth = "1"
+]
+
+
+
+edge [
+class = "edge"
+,weight = "1"
+,penwidth = "1"
+,"_vis_" = "label"
+,"color" = "#a0a0a4"
+,"style" = "solid"
+];
+
+
+"N2" -> "N3" [id = ""
+,dir=none
+,weight = "1"
+,penwidth = "1"
+,xlabel = "15"
+,"style" = "solid"
+];
+
+"N2" -> "N4" [id = ""
+,dir=none
+,weight = "1"
+,penwidth = "1"
+,xlabel = "16"
+,"style" = "solid"
+];
+
+"N3" -> "N5" [id = ""
+,dir=none
+,weight = "1"
+,penwidth = "1"
+,xlabel = "20"
+,"style" = "solid"
+];
+
+"N3" -> "N4" [id = ""
+,dir=none
+,weight = "1"
+,penwidth = "1"
+,xlabel = "19"
+,"style" = "solid"
+];
+
+"N1" -> "N4" [id = ""
+,dir=none
+,weight = "1"
+,penwidth = "1"
+,xlabel = "12"
+,"style" = "solid"
+];
+
+"N4" -> "N5" [id = ""
+,dir=none
+,weight = "1"
+,penwidth = "1"
+,xlabel = "22"
+,"style" = "solid"
+];
+
+"N5" -> "N6" [id = ""
+,dir=none
+,weight = "1"
+,penwidth = "1"
+,xlabel = "24"
+,"style" = "solid"
+];
+
+"N6" -> "N1" [id = ""
+,dir=none
+,weight = "1"
+,penwidth = "1"
+,xlabel = "14"
+,"style" = "solid"
+];
+
+"N1" -> "N2" [id = ""
+,dir=none
+,weight = "1"
+,penwidth = "1"
+,xlabel = "10"
+,"style" = "solid"
+];
+
+"N1" -> "N5" [id = ""
+,dir=none
+,weight = "1"
+,penwidth = "1"
+,xlabel = "13"
+,"style" = "solid"
+];
+
+"N1" -> "N3" [id = ""
+,dir=none
+,weight = "1"
+,penwidth = "1"
+,xlabel = "11"
+,"style" = "solid"
+];
+
+"N2" -> "N5" [id = ""
+,dir=none
+,weight = "1"
+,penwidth = "1"
+,xlabel = "17"
+,"style" = "solid"
+];
+
+"N2" -> "N6" [id = ""
+,dir=none
+,weight = "1"
+,penwidth = "1"
+,xlabel = "18"
+,"style" = "solid"
+];
+
+"N3" -> "N6" [id = ""
+,dir=none
+,weight = "1"
+,penwidth = "1"
+,xlabel = "21"
+,"style" = "solid"
+];
+
+"N4" -> "N6" [id = ""
+,dir=none
+,weight = "1"
+,penwidth = "1"
+,xlabel = "23"
+,"style" = "solid"
+];
+
+
+}
