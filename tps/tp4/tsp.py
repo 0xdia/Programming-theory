@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import pygraphviz as pgv
+import time
 
 class TSP:
     def __init__(self, g):
@@ -9,6 +10,7 @@ class TSP:
         self.edges = g.edges()
         self.best_path = None
         self.best_distance = None
+        self.execution_time = None
 
 
     def get_distance(self, node_1, node_2):
@@ -44,6 +46,8 @@ class TSP:
 
     def algorithm(self, start):
         """Brute force algorithm that gives the exact solution for a TSP"""
+        self.execution_time = time.time()
+
         self.best_path = None
         self.best_distance = 1000000000000
 
@@ -75,9 +79,11 @@ class TSP:
 
             return best_path, best_distance
 
-            
+        
         self.best_path, self.best_distance = algorithm_continue([start], 0)
         
+        self.execution_time = time.time() - self.execution_time
+
         path_as_sequence_of_edges = []
         for i in range(1, len(self.best_path)):
             path_as_sequence_of_edges.append((self.best_path[i-1], self.best_path[i]))
@@ -87,6 +93,8 @@ class TSP:
 
     def hill_climbing(self, start):
         """Hill climbing heuristic"""
+        self.execution_time = time.time()
+
         self.best_path = [start]
         self.best_distance = 0
         N = len(self.nodes)
@@ -111,6 +119,9 @@ class TSP:
 
         self.best_distance += self.get_distance(start, self.best_path[-1])
         self.best_path.append(start)
+
+        self.execution_time = time.time() - self.execution_time
+
         path_as_sequence_of_edges = []
         for i in range(1, len(self.best_path)):
             path_as_sequence_of_edges.append((self.best_path[i-1], self.best_path[i]))
