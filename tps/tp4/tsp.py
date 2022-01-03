@@ -108,10 +108,6 @@ class TSP:
 
             we.sort()
             for w in we:
-                """ if not w[1] in self.best_path:
-                    self.best_distance += w[0]
-                    self.best_path.append(w[1])
-                    break """
                 if not w[2] in self.best_path:
                     self.best_distance += w[0]
                     self.best_path.append(w[2])
