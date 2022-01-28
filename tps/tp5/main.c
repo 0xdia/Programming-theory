@@ -327,7 +327,7 @@ void init_estim_tables() {
             eg_table[pc + 1][sq] = eg_value[p] + eg_pesto_table[p][FLIP(sq)];
         }
     }
-    mg_normalizer = mg_value[PAWN] + mg_pawn_norm + mg_value[KNIGHT] + mg_knight_norm + mg_value[BISHOP] + mg_bishop_norm +
+    mg_normalizer = mg_pawn_norm + mg_value[KNIGHT] + mg_knight_norm + mg_value[BISHOP] + mg_bishop_norm +
     mg_value[ROOK] + mg_rook_norm + mg_value[QUEEN] + mg_queen_norm + mg_value[KING] + mg_king_norm;
     eg_normalizer = eg_value[PAWN] + eg_pawn_norm + eg_value[KNIGHT] + eg_knight_norm + eg_value[BISHOP] + eg_bishop_norm +
     eg_value[ROOK] + eg_rook_norm + eg_value[QUEEN] + eg_queen_norm + eg_value[KING] + eg_king_norm;
@@ -380,6 +380,8 @@ int estim(struct config conf) {
     // Remplacer ce code par une estimation de meilleur qualité
     // ********************************************************
 
+    if(side2move == OTHER(WHITE)) return better_estim(conf);
+
     int i, j, ScrQte;
     int pionB = 0, pionN = 0, cfB = 0, cfN = 0, tB = 0, tN = 0, nB = 0, nN = 0;
 
@@ -423,7 +425,6 @@ int estim(struct config conf) {
 
     if (ScrQte > 95) ScrQte = 95;    // pour rétrécir l'intervalle à
     if (ScrQte < -95) ScrQte = -95;  // ]-95 , +95[ car ce n'est qu'une estimation
-    printf("estim %d | new estim %d\n", ScrQte, better_estim(conf));
     return ScrQte;
 
 }  // estim
@@ -1159,7 +1160,7 @@ void affich(struct config conf) {
 
 int main(int argc, char *argv[]) {
     char sy, dy, ch[10];
-    int sx, dx, n, i, j, score, stop, cout, cout2, legal, hauteur, sauter;
+    int sx, dx, n, i, j, score, cout, cout2, legal, hauteur, sauter;
     int cmin, cmax;
 
     struct config T[100], conf, conf1;
@@ -1178,111 +1179,50 @@ int main(int argc, char *argv[]) {
     init(&conf);
 
     printf("\n\nVous êtes les + (Blancs) et je suis les - (Noirs)\n\n");
+    printf("\n\nMachine vs Machine\n\n");
 
     // Boucle principale du dérouleùment d'une partie ...
-    stop = 0;
-    while (!stop) {
-        affich(conf);
-
-        // récupérer le coup du joueur ...
-        printf("Coup (sy sx dy dx : depl normal / 0 0 0 0 : pt roq / 1 1 1 1 : grd roq / 2 niv 2 2 : estim profonde ) : ");
-        scanf(" %c %d %c %d", &sy, &sx, &dy, &dx);
-
-        copier(&conf, &conf1);
-
-        // Traitement du coup du joueur ...
-        sauter = 0;
-        if (sy == '0') {  // petit roque ...
-            conf1.mat[0][4] = 0;
-            conf1.mat[0][7] = 0;
-            conf1.mat[0][6] = 'r';
-            conf1.xrB = 0;
-            conf1.yrB = 6;
-            conf1.mat[0][5] = 't';
-            conf1.roqueB = 'e';
-        } else if (sy == '1') {  // grand roque ...
-            conf1.mat[0][4] = 0;
-            conf1.mat[0][0] = 0;
-            conf1.mat[0][2] = 'r';
-            conf1.xrB = 0;
-            conf1.yrB = 2;
-            conf1.mat[0][3] = 't';
-            conf1.roqueB = 'e';
-        } else if (sy == '2') {  // Estimation à la profondeur spécifiée dans sx
-            cout = minmax_ab(conf, MAX, sx, -INFINI, +INFINI);
-            printf("Estimation à %d niveaux = %d\n", sx, cout);
-            sauter = 1;
-        } else {  // deplacement normal (les autres coups) ...
-            conf1.mat[dx - 1][dy - 'a'] = conf1.mat[sx - 1][sy - 'a'];
-            conf1.mat[sx - 1][sy - 'a'] = 0;
-            // vérifier possibilité de transformation d'un pion arrivé en fin d'échiquier ...
-            if (dx == 8 && conf1.mat[dx - 1][dy - 'a'] == 'p') {
-                printf("Pion arrivé en ligne 8, transformer en (p/c/f/t/n) : ");
-                scanf(" %s", ch);
-                switch (ch[0]) {
-                    case 'c':
-                        conf1.mat[dx - 1][dy - 'a'] = 'c';
-                        break;
-                    case 'f':
-                        conf1.mat[dx - 1][dy - 'a'] = 'f';
-                        break;
-                    case 't':
-                        conf1.mat[dx - 1][dy - 'a'] = 't';
-                        break;
-                    case 'p':
-                        conf1.mat[dx - 1][dy - 'a'] = 'p';
-                        break;
-                    default:
-                        conf1.mat[dx - 1][dy - 'a'] = 'n';
-                }
-            }
-            // vérifier si victoire (le roi N n'existe plus) ...
-            if (conf1.xrN == dx - 1 && conf1.yrN == dy - 'a') {
-                conf1.xrN = -1;
-                conf1.yrN = -1;
+    while (1) {
+        printf("Tour du joueur Blanc ...\n");
+        side2move = OTHER(WHITE);
+        generer_succ(conf, MAX, T, &n);
+        score = +INFINI;
+        j = -1;
+        for (i = 0; i < n; i++) {
+            cout = minmax_ab(T[i], MIN, hauteur, -INFINI, +INFINI);
+            if (cout < score) {  // Choisir le meilleur coup (c-a-d le plus petit score)
+                score = cout;
+                j = i;
             }
         }
+        if (j != -1) {  // jouer le coup et aller à la prochaine itération ...
+            copier(&T[j], &conf);
+            conf.val = score;
+        } else {  // S'il n'y a pas de successeur possible, l'ordinateur à perdu
+            printf(" *** J'ai perdu (joueur Blanc) ***\n");
+            break;
+        }
+        affich(conf);
 
-        if (sauter == 0) {
-            // vérification de la légalité du coup effectué par le joueur ...
-            generer_succ(conf, MAX, T, &n);
-
-            legal = 0;
-            for (i = 0; i < n && !legal; i++)
-                if (egal(T[i].mat, conf1.mat)) legal = 1;
-
-            if (legal && !feuille(conf1, &cout)) {
-                printf("OK\n\n");
-                i--;
-                copier(&T[i], &conf);
-                affich(conf);
-
-                // L'ordinateur joue son coup ...
-                printf("A mon tour maintenant ...\n");
-
-                generer_succ(conf, MIN, T, &n);
-
-                score = +INFINI;
-                j = -1;
-
-                for (i = 0; i < n; i++) {
-                    cout = minmax_ab(T[i], MAX, hauteur, -INFINI, +INFINI);
-                    if (cout < score) {  // Choisir le meilleur coup (c-a-d le plus petit score)
-                        score = cout;
-                        j = i;
-                    }
-                }
-                if (j != -1) {  // jouer le coup et aller à la prochaine itération ...
-                    copier(&T[j], &conf);
-                    conf.val = score;
-                } else {  // S'il n'y a pas de successeur possible, l'ordinateur à perdu
-                    printf(" *** J'ai perdu ***\n");
-                    stop = 1;
-                }
-            } else if (!legal)
-                printf("Coup illégal -- réessayer\n");
-            else
-                stop = 1;
-        }  // if (sauter == 0)
+        printf("Tour du joueur Noir ...\n");
+        side2move = OTHER(BLACK);
+        generer_succ(conf, MIN, T, &n);
+        score = +INFINI;
+        j = -1;
+        for (i = 0; i < n; i++) {
+            cout = minmax_ab(T[i], MAX, hauteur, -INFINI, +INFINI);
+            if (cout < score) {  // Choisir le meilleur coup (c-a-d le plus petit score)
+                score = cout;
+                j = i;
+            }
+        }
+        if (j != -1) {  // jouer le coup et aller à la prochaine itération ...
+            copier(&T[j], &conf);
+            conf.val = score;
+        } else {  // S'il n'y a pas de successeur possible, l'ordinateur à perdu
+            printf(" *** J'ai perdu (joueur Noir) ***\n");
+            break;
+        }
+        affich(conf);
     }      // while
 }
