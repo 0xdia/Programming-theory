@@ -421,7 +421,7 @@ int estim(struct config conf) {
 
     // Somme pondérée de pièces de chaque joueur.
     // Le facteur 1.4 pour ne pas sortir de l'intervalle ]-100 , +100[
-    ScrQte = -((pionB + cfB * 6 + tB * 8 + nB * 20) + (pionN + cfN * 6 + tN * 8 + nN * 20)) * 1.4;
+    ScrQte = (-(pionB + cfB * 6 + tB * 8 + nB * 20) + (pionN + cfN * 6 + tN * 8 + nN * 20)) * 1.4;
 
     if (ScrQte > 95) ScrQte = 95;    // pour rétrécir l'intervalle à
     if (ScrQte < -95) ScrQte = -95;  // ]-95 , +95[ car ce n'est qu'une estimation
@@ -1166,7 +1166,7 @@ int main(int argc, char *argv[]) {
     struct config T[100], conf, conf1;
 
     if (argc == 1)
-        hauteur = 1;  // par défaut on fixe la profondeur d'évaluation à 4
+        hauteur = 2;  // par défaut on fixe la profondeur d'évaluation à 4
     else
         hauteur = atoi(argv[1]);  // sinon elle est récupérée depuis la ligne de commande
 
